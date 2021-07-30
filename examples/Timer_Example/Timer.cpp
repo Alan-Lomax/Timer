@@ -10,7 +10,7 @@ void Timer::init() {
     // Initialize local variables for the new class member
   _runTime = 0;
   _pauseTime = 0;
-  _previousMillis = 0;
+  _previousMillis = millis();
   _running = false;
   _alarm = false;
 }
