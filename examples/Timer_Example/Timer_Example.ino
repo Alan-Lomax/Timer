@@ -2,7 +2,7 @@
   Timer example code
 */
 #include "Timer.h"
-const byte myLed = LED_BUILTIN;       // We will use on board LED to idicate what is going on
+const byte myLed = LED_BUILTIN;       // We will use on board LED to indicate what is going on
 
 // Define two members of the Timer class
 Timer myTimer1(5000);                 // myTimer1 is set to 5 seconds.
