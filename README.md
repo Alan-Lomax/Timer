@@ -64,12 +64,13 @@ This does ot cause problems for me because absolute accuracy is not a requiremen
     void stop();                        // Stop the Timer by setting _running to false (And reset _runTime and _pauseTime to zero)
     void pause();                       // Toggle the Timer from _paused = true to _paused=false 
                                         // (When _paused = true accumulate time in _pausetime which is to be deducted from running time.)
-    void setalarmTime(long MyalarmTime);// Resets the Alarm Timer to a new value(in millis)
+    void setalarmTime(unsigned long MyalarmTime);     // Resets the Alarm Timer to a new value(in millis)
     
 ### Properties:
-    bool alarm();                       // Returns true if elapsed time - _pausetime has exceeded the alarmTime, false otherwise.
-    long currentValue();                // Returns the current value of the timer (in millis)
-    long pauseTime();                   // Returns the current value of the Pause timer (in millis)
-    long alarmTime();                   // Returns the current setting of the Alarm Timer (in millis)
-    bool running();                     // return true / false according to if timer is runnning.
+    bool running();                      // return true / false according to if timer is runnning.
+    bool alarm();                        // Returns true if elapsed time - _pausetime has exceeded the alarmTime, false otherwise.
+    unsigned long currentValue();        // Returns the current value of the timer (in millis)
+    unsigned long pauseTime();           // Returns the current value of the Pause timer (in millis)
+    unsigned long alarmTime();           // Returns the current setting of the Alarm Timer (in millis)
+
  
