@@ -10,7 +10,7 @@ void Timer::init() {
     // Initialize local variables for the new class member
   _runTime = 0;
   _pauseTime = 0;
-  _previousMillis = 0;
+  _previousMillis = millis();
   _running = false;
   _alarm = false;
 }
@@ -21,11 +21,11 @@ void Timer::update() {
     unsigned long delta = millis() - _previousMillis;
     
     if (_pause) {
-      _pauseTime = _pauseTime + delta;   // an accumulating time
+      _pauseTime += delta;               // an accumulating time
       _previousMillis = millis();
     }
     else {
-      _runTime = _runTime + delta;       // an accumulating time
+      _runTime += delta;                 // an accumulating time
       _previousMillis = millis();
     }
 
@@ -66,7 +66,6 @@ void Timer::pause() {
 
 void Timer::start() {
   // Start Timer
-  _running = true;
   if (!_pause) {                    // If we were not paused then calling start will reset all timing values
     _runTime = 0;
     _pauseTime = 0;
@@ -74,7 +73,8 @@ void Timer::start() {
   else {                            // If we were paused, dont reset timing values just unpause us
     _pause = false;
   }   
-  _previousMillis = millis();
+  _running = true;                  // set the flag to say Timer is running
+  _previousMillis = millis();       // capture the current time
 }
 
 void Timer::stop() {
