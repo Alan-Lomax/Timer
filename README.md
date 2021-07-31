@@ -2,25 +2,60 @@
 
 This class defines a timer where the alarm will be set to true after an interval you define has expired.
 Once defined the Timer can be started, paused or stopped. All code is written in a non blocking manner. (No delays).
-Key properties can be read to determine their current value enabling other actions to occur only at specific times. 
 
-### Files: Timer.h, Timer.CPP
-
-### Usage:
-Include the header file near the top of your code. (After this is done the compiler will know how to handle you using it.)
-
-    #include "Timer.h";
-
-### Instantiation:
-    Timer(long MyalarmTime);            // Default definition specifying the alarm time in milliseconds.
-                                        // Timer will be in stopped state, running time will not be accumulate until started.
-
-### Example: 
-
-    Timer myTimer(30000);               // Define a new Timer with a 30 second alarm.
+Notes:
 
 The time values can be inspected or changed, the timer can be started, paused or stopped.
 Normally in your loop code you will be looking for myTimer.alarm() == true
+
+Timing values are not particularly accurate - but they are very repeatable.
+For example in the code below the Timer set to 5000 ms goes into alarm after 8 seconds. (And does it consistantly)
+I have not found a good explanation for this but the code seems correct. (I welcome comments if you can spot an issue)
+This does ot cause problems for me because absolute accuracy is not a requirement and the values are ajusted until the desired effect is achieved.
+
+### Files: Timer.h, Timer.CPP
+
+### Example: 
+
+    /*
+      Timer example code
+    */
+    #include "Timer.h"
+    const byte myLed = LED_BUILTIN;       // We will use on board LED to idicate what is going on
+
+    // Define two members of the Timer class
+    Timer myTimer1(5000);                 // myTimer1 is set to 5 seconds.
+    Timer myTimer2(1000);                 // myTimer2 is set to 1 second
+
+
+    void setup() {
+      Serial.begin(115200);               // for serial / debug console
+      Serial.println(__FILE__);           // by default I like to output the file name as a minimum.
+      pinMode(LED_BUILTIN, OUTPUT);       // define our builtin LED as an output pin
+      myTimer1.start();                   // start the 10 second timer right away
+    }
+
+    void loop() {
+      // The update function does all the hard work - but we dont need to see it happening.
+      myTimer1.update();                     // update timing values
+      myTimer2.update();                     // update timing values
+
+      // The rest of this sample program is inspecting properties of our timers and starting or stopping them.
+      if (myTimer1.alarm() == true) {        // If time is up
+        Serial.println("Timer1 in alarm.");
+        digitalWrite (LED_BUILTIN, true);    // Turn on the LED
+        myTimer1.stop();                     // stop the timer
+        myTimer2.start();                    // and start the second timer
+      }
+      if (myTimer2.alarm() == true) {        // If the extra time is up
+        Serial.println("  >> Timer2 in alarm.");
+        digitalWrite (LED_BUILTIN, false); // Turn off the LED
+
+        myTimer1.start();                  // Restart the first timer
+        myTimer2.stop();                   // and stop the second timer
+      }
+    }
+
 
 
 ### Methods
