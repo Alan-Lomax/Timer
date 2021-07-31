@@ -48,7 +48,7 @@ bool Timer::running() {
   return _running;
 }
 
-void Timer::setalarmTime( unsigned long MyalarmTime) {
+void Timer::setAlarmTime( unsigned long MyalarmTime) {
   // update the desired alarm time (without resetting the timer). If we were in alarm next call to update will clear it.
   _alarmTime = MyalarmTime;
 }

@@ -1,4 +1,4 @@
-#ifndef MY_TIMER_H
+ifndef MY_TIMER_H
 #define MY_TIMER_H
 #include <Arduino.h>
 /*
@@ -36,7 +36,7 @@ class Timer {
     unsigned long currentValue();                // Returns the current value of the timer (in millis)
     unsigned long pauseTime();                   // Returns the current value of the Pause timer (in millis)
     unsigned long alarmTime();                   // Returns the current setting of the Alarm Timer (in millis)
-    void setalarmTime(unsigned long MyalarmTime);// Resets the Alarm Timer to a new value(in millis)
+    void setAlarmTime(unsigned long MyalarmTime);// Resets the Alarm Timer to a new value(in millis)
     bool running();                              // return true / false according to if timer is runnning.
 };
 #endif
