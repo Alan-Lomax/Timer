@@ -1,46 +1,40 @@
 #include "Timer.h"
 
-Timer::Timer(long MyalarmTime) {
+Timer::Timer(unsigned long MyalarmTime) {
   // Save the passed timing value into the equivelent local variables (with underscore)
   _alarmTime = MyalarmTime;
   init();
-  }
+}
 
 void Timer::init() {
-    // Initialize local variables for the new class member
+  // Initialize local variables for the new class member
   _runTime = 0;
   _pauseTime = 0;
   _previousMillis = millis();
   _running = false;
   _alarm = false;
+  _pause = false;
 }
 
 void Timer::update() {
   if (_running) {                        // we only care if timer is running
     // check to see if it's time to change the state of the Alarm
-    unsigned long delta = millis() - _previousMillis;
-    
-    if (_pause) {
-      _pauseTime += delta;               // an accumulating time
+
+    if (_pause) {                                          // paused
+      _pauseTime += (millis() - _previousMillis);          // accumulate time
       _previousMillis = millis();
     }
-    else {
-      _runTime += delta;                 // an accumulating time
+    else {                                                 // not paused
+      _runTime += (millis() - _previousMillis);            // accumulate time
       _previousMillis = millis();
     }
 
-    if (_runTime >= _alarmTime) {
+    if (_runTime >= _alarmTime) {                          // update alarm flag (Consider that _alarmTime or _runTime might have changed)
       _alarm = true;
-      // nothing more to do until something changes.
     }
     else {
-      _alarm = false;                                                      // update alarm flag (maybe _alarmTime has been changed)
+      _alarm = false;
     }
-  }
-  else {
-    // Timer is not running so clear any alarm condition that may exist.
-    // (keep timer values for inspection up until time is started again)
-    _alarm = false; 
   }
 }
 
@@ -54,7 +48,7 @@ bool Timer::running() {
   return _running;
 }
 
-void Timer::setalarmTime(long MyalarmTime) {
+void Timer::setalarmTime( unsigned long MyalarmTime) {
   // update the desired alarm time (without resetting the timer). If we were in alarm next call to update will clear it.
   _alarmTime = MyalarmTime;
 }
@@ -69,30 +63,30 @@ void Timer::start() {
   if (!_pause) {                    // If we were not paused then calling start will reset all timing values
     _runTime = 0;
     _pauseTime = 0;
+    _previousMillis = millis();     // and capture the current time
   }
-  else {                            // If we were paused, dont reset timing values just unpause us
+  else {                            // If we were paused then don't reset timing values just unpause us
     _pause = false;
-  }   
+  }
   _running = true;                  // set the flag to say Timer is running
-  _previousMillis = millis();       // capture the current time
 }
 
 void Timer::stop() {
-  // Reinitialize the time 
+  // Reinitialize the time
   init();
 }
 
-long Timer::currentValue() {
+unsigned long Timer::currentValue() {
   // Returns the current value of the timer (in millis)
   return _runTime ;
 }
 
-long Timer::pauseTime() {
+unsigned long Timer::pauseTime() {
   // Returns the current accumulated pause time (in millis)
   return _pauseTime ;
 }
 
-long Timer::alarmTime() {
+unsigned long Timer::alarmTime() {
   /// Returns the current setting of the Alarm Timer (in millis)
   return _alarmTime ;
 }
