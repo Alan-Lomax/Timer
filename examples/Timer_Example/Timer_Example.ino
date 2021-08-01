@@ -10,7 +10,7 @@ Timer myTimer2(1000);                 // myTimer2 is set to 1 second
 
 
 void setup() {
-  Serial.begin(115200);               // for serial / debug console
+  Serial.begin(9600);                 // for serial / debug console
   Serial.println(__FILE__);           // by default I like to output the file name as a minimum.
   pinMode(LED_BUILTIN, OUTPUT);       // define our builtin LED as an output pin
   myTimer1.start();                   // start the 10 second timer right away
