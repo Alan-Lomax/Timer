@@ -1,4 +1,4 @@
-ifndef MY_TIMER_H
+#ifndef MY_TIMER_H
 #define MY_TIMER_H
 #include <Arduino.h>
 /*
@@ -12,14 +12,16 @@ ifndef MY_TIMER_H
  ** calls to the update method arerequired.         **
  *****************************************************
 
- Alarm is 'true' if    (elapsed time - pause time) >= alarmTime
+  Alarm is 'true' if    (elapsed time - pause time) >= alarmTime
 
 */
 class Timer {
   private:
     unsigned long _alarmTime;           // milliseconds before sounding alarm
+    unsigned long _nextTime;            // milliseconds of the next scheduled event
     unsigned long _pauseTime;           // milliseconds spent in pause
     unsigned long _runTime;             // running time in milliseconds (time that timer has been running after deducting _pauseTime)
+    unsigned long _snapTime;            // a snapshout of current time so it will not change during current cycle of sketch execution
     unsigned long _previousMillis;      // will store the start time of the timer
     bool _pause;                        // only true if we are paused
     bool _running;                      // only true if timer is running
