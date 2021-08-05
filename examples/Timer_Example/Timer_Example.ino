@@ -30,9 +30,9 @@ void loop() {
   }
   if (myTimer2.alarm() == true) {        // If the extra time is up
     Serial.println("  >> Timer2 in alarm.");
-    digitalWrite (LED_BUILTIN, false); // Turn off the LED
+    digitalWrite (LED_BUILTIN, false);   // Turn off the LED
 
-    myTimer1.start();                  // Restart the first timer
-    myTimer2.stop();                   // and stop the second timer
+    myTimer1.start();                    // Restart the first timer
+    myTimer2.stop();                     // and stop the second timer
   }
 }
