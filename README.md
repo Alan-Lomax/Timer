@@ -29,7 +29,7 @@ This does ot cause problems for me because absolute accuracy is not a requiremen
 
 
     void setup() {
-      Serial.begin(115200);               // for serial / debug console
+      Serial.begin(9600);                 // for serial / debug console
       Serial.println(__FILE__);           // by default I like to output the file name as a minimum.
       pinMode(LED_BUILTIN, OUTPUT);       // define our builtin LED as an output pin
       myTimer1.start();                   // start the 10 second timer right away
@@ -49,12 +49,13 @@ This does ot cause problems for me because absolute accuracy is not a requiremen
       }
       if (myTimer2.alarm() == true) {        // If the extra time is up
         Serial.println("  >> Timer2 in alarm.");
-        digitalWrite (LED_BUILTIN, false); // Turn off the LED
+        digitalWrite (LED_BUILTIN, false);   // Turn off the LED
 
-        myTimer1.start();                  // Restart the first timer
-        myTimer2.stop();                   // and stop the second timer
+        myTimer1.start();                    // Restart the first timer
+        myTimer2.stop();                     // and stop the second timer
       }
     }
+
 
 
 
