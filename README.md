@@ -8,10 +8,6 @@ Notes:
 The time values can be inspected or changed, the timer can be started, paused or stopped.
 Normally in your loop code you will be looking for myTimer.alarm() == true
 
-Timing values are not particularly accurate - but they are very repeatable.
-For example in the code below the Timer set to 5000 ms goes into alarm after 8 seconds. (And does it consistantly)
-I have not found a good explanation for this but the code seems correct. (I welcome comments if you can spot an issue)
-This does ot cause problems for me because absolute accuracy is not a requirement and the values are ajusted until the desired effect is achieved.
 
 ### Files: Timer.h, Timer.CPP
 
